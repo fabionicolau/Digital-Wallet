@@ -1,5 +1,6 @@
 import * as express from 'express';
 import userRoutes from './routes/userRoutes';
+import accountRoutes from './routes/accountRoutes';
 
 
 class App {
@@ -28,6 +29,7 @@ class App {
 
   private router():void {
     this.app.use(userRoutes);
+    this.app.use(accountRoutes);
   }
 
   public start(PORT: string | number):void {
