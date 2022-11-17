@@ -4,12 +4,18 @@ export interface IAccount {
 }
 
 export interface IUserAccount {
+  id?: number;
   username: string;
-  account: {
-    balance: number;
-  };
+  password: string;
+  accountId: number;
+  account: IAccount;
+}
+
+export interface IUserBalance {
+  username: string;
+  balance: number;
 }
 
 export interface IAccountService<T> {
-  getBalance(accountId: number): Promise<T>;
+  getBalance(id: number): Promise<IUserBalance>;
 }

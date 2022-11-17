@@ -44,7 +44,7 @@ Transaction.init({
 }, {
   sequelize: db,
   underscored: false,
-  timestamps: true,
+  timestamps: false,
   modelName: 'Transaction',
   tableName: 'Transactions',
 });
