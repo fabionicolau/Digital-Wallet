@@ -49,7 +49,7 @@ Transaction.init({
   tableName: 'Transactions',
 });
 
-Transaction.hasMany(Account, { foreignKey: 'debitedAccountId', as: 'debitedAccount' });
-Transaction.hasMany(Account, { foreignKey: 'creditedAccountId', as: 'creditedAccount' });
+Transaction.hasMany(Account, { foreignKey: 'id', as: 'debitedAccount' });
+Transaction.hasMany(Account, { foreignKey: 'id', as: 'creditedAccount' });
 
 export default Transaction;

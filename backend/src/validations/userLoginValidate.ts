@@ -1,4 +1,5 @@
 import * as Joi from 'joi';
+import { regexp } from 'sequelize/types/lib/operators';
 import { IUserLogin } from '../interfaces/userInterfaces';
 
 const userLoginValidate = ({ username, password }: IUserLogin): IUserLogin => {
@@ -7,10 +8,10 @@ const userLoginValidate = ({ username, password }: IUserLogin): IUserLogin => {
       'string.empty': 'All fields must be filled',
       'string.min': 'username must be at least 3 characters long',
     }),
-    password: Joi.string().min(8).required().messages({
+    password: Joi.string().min(8).regex((/(?=.*[A-Z])(?=.*\d)/)).required().messages({
       'string.empty': 'All fields must be filled',
       'string.min': 'password must be at least 8 characters long',
-      'string.pattern.base': 'password must contain at least one uppercase letter',
+      'string.pattern.base': 'password must contain at least one uppercase letter and one number',
     }),
   });
 

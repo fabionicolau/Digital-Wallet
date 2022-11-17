@@ -1,6 +1,6 @@
 import { Model, INTEGER, STRING } from 'sequelize';
-import Account from './Account';
 import db from '.';
+import Account from './Account';
 
 class User extends Model {
   id!: number;
@@ -40,6 +40,6 @@ User.init({
   tableName: 'Users',
 });
 
-User.hasOne(Account, { foreignKey: 'accountId', as: 'userAccount' });
+User.hasOne(Account, { foreignKey: 'id', as: 'account' });
 
 export default User;

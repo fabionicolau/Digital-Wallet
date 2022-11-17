@@ -18,4 +18,5 @@ export interface IUserPayload {
 
 export interface IUserService<T> {
   userLogin(user: IUserLogin): Promise<T>;
+  userRegister(user: IUserLogin): Promise<string | undefined>;
 }
