@@ -1,5 +1,4 @@
 import * as Joi from 'joi';
-import { regexp } from 'sequelize/types/lib/operators';
 import { IUserLogin } from '../interfaces/userInterfaces';
 
 const userLoginValidate = ({ username, password }: IUserLogin): IUserLogin => {

@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs';
-import { IUserService, IUserLogin } from '../interfaces/userInterfaces';
+import { IUserService, IUserLogin, IUserReturn } from '../interfaces/userInterfaces';
 import createToken from '../helpers/jwtCreate';
 import User from '../database/models/User';
 import Account from '../database/models/Account';
@@ -7,8 +7,8 @@ import userLoginValidate from '../validations/userLoginValidate';
 import sequelize from '../database/models';
  
 
-export default class UserService implements IUserService<string | null > {
-  userLogin = async ({ username, password }: IUserLogin): Promise<string | null > => {
+export default class UserService implements IUserService {
+  userLogin = async ({ username, password }: IUserLogin): Promise<IUserReturn | null> => {
     userLoginValidate({ username, password });
 
     const user = await User.findOne({ where: { username } });
@@ -21,10 +21,15 @@ export default class UserService implements IUserService<string | null > {
 
     const token = createToken(user);
 
-    return token;
+    return { 
+      id: user.id,
+      username: user.username,
+      accountId: user.accountId,
+      token 
+    } as IUserReturn;
   };
 
-  userRegister = async ({ username, password }: IUserLogin): Promise<string | undefined > => {
+  userRegister = async ({ username, password }: IUserLogin): Promise<IUserReturn | undefined > => {
       userLoginValidate({ username, password });
       const isUsernameExists = await User.findOne({ where: { username } });
 
@@ -42,7 +47,13 @@ export default class UserService implements IUserService<string | null > {
       await t.commit();
       
       const token = createToken(user);
-      return token;    
+
+      return { 
+        id: user.id,
+        username: user.username,
+        accountId: user.accountId,
+        token 
+      } as IUserReturn;;    
       } catch (error) {
         await t.rollback();
       }

@@ -6,7 +6,7 @@ class User extends Model {
   id!: number;
   username!: string;
   password!: string;
-  accountId!: string;
+  accountId!: number;
 }
 
 User.init({
@@ -25,7 +25,7 @@ User.init({
     allowNull: false,
   },
   accountId: {
-    type: STRING,
+    type: INTEGER,
     allowNull: false,
     references: {
       model: "Accounts",
