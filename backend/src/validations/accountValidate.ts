@@ -1,8 +1,10 @@
+import { IUserAccount } from "../interfaces/accountInterfaces";
 import Account from "../database/models/Account";
+import User from "../database/models/User";
 
-const accountValidate = async (debited: number, credited: number, value: number) => {
-  const debitedAccount = await Account.findOne({ where: { id: debited } });
-  const creditedAccount = await Account.findOne({ where: { id: credited } });
+const accountValidate = async (debitedAccountId: number, creditedUserName: string, value: number) => {
+  const debitedAccount = await Account.findOne({ where: { id: debitedAccountId } });
+  const creditedUser = await User.findOne({ where: { username: creditedUserName } });
 
   if (value <= 0) {
     const error = new Error("Value must be greater than 0");
@@ -10,7 +12,13 @@ const accountValidate = async (debited: number, credited: number, value: number)
     throw error;
   }
 
-  if (debited === credited) {
+  if (!creditedUser) {
+    const error = new Error("Credited account not found");
+    error.name = "notFound";
+    throw error;
+  }
+
+  if (debitedAccountId === creditedUser.accountId) {
     const error = new Error('You cannot transfer to the same account');
     error.name = 'conflict';
     throw error; 
@@ -22,11 +30,7 @@ const accountValidate = async (debited: number, credited: number, value: number)
     throw error;
   }
 
-  if (!creditedAccount) {
-    const error = new Error("Credited account not found");
-    error.name = "notFound";
-    throw error;
-  }
+  return creditedUser.accountId
 }
 
 export default accountValidate;

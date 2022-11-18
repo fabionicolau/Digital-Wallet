@@ -6,7 +6,13 @@ export interface ITransaction {
   createdAt?: Date;
 }
 
-export interface ITransactionService<T> {
-  createTransaction(transaction: ITransaction): Promise<ITransaction | undefined>;
+export interface ITransactionBody {
+  debitedAccountId: number;
+  username: string;
+  value: number; 
+}
+
+export interface ITransactionService {
+  createTransaction(transaction: ITransactionBody): Promise<ITransaction | undefined>;
   // getTransactions(accountId: number): Promise<T>;
 }
