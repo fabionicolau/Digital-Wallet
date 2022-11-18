@@ -2,7 +2,7 @@ import { IUserAccount } from "../interfaces/accountInterfaces";
 import Account from "../database/models/Account";
 import User from "../database/models/User";
 
-const accountValidate = async (debitedAccountId: number, creditedUserName: string, value: number) => {
+const transactionValidate = async (debitedAccountId: number, creditedUserName: string, value: number) => {
   const debitedAccount = await Account.findOne({ where: { id: debitedAccountId } });
   const creditedUser = await User.findOne({ where: { username: creditedUserName } });
 
@@ -33,4 +33,4 @@ const accountValidate = async (debitedAccountId: number, creditedUserName: strin
   return creditedUser.accountId
 }
 
-export default accountValidate;
+export default transactionValidate;

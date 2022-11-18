@@ -19,6 +19,7 @@ User.init({
   username: {
     type: STRING,
     allowNull: false,
+    unique: true,
   },
   password: {
     type: STRING,

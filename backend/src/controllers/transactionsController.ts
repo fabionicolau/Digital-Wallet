@@ -16,4 +16,29 @@ export default class TransactionController {
       errorHandler(error as Error, req, res);
     }
   }
+
+  getAllTransactions = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { accountId } = req.body.jwtInfos;
+      const allTransactions = await this.transactionService.getAllTransactions(accountId);
+  
+      res.status(200).json(allTransactions);
+    } catch (error) {
+      console.log(error)
+      errorHandler(error as Error, req, res);    
+    }
+  }
+
+  getFilteredTransactions = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { accountId } = req.body.jwtInfos;
+      const { date, transaction } = req.query;
+      const transactionsByDate = await this.transactionService
+      .getFilteredTransactions(accountId, date as string, transaction as string);
+  
+      res.status(200).json(transactionsByDate);
+    } catch (error) {
+      errorHandler(error as Error, req, res);
+    }
+  }
 }

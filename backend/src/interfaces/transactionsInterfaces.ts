@@ -6,6 +6,11 @@ export interface ITransaction {
   createdAt?: Date;
 }
 
+export interface ITransactionWithUsernames extends ITransaction {
+  debitedUserName: string;
+  creditedUserName: string;
+}
+
 export interface ITransactionBody {
   debitedAccountId: number;
   username: string;
@@ -14,5 +19,6 @@ export interface ITransactionBody {
 
 export interface ITransactionService {
   createTransaction(transaction: ITransactionBody): Promise<ITransaction | undefined>;
-  // getTransactions(accountId: number): Promise<T>;
+  getAllTransactions(accountId: number): Promise<ITransactionWithUsernames[]>;
+  getFilteredTransactions(accountId: number, date: string, transaction: string): Promise<ITransactionWithUsernames[] | undefined>;
 }
