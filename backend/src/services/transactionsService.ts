@@ -1,15 +1,16 @@
-import * as Sequelize from "sequelize";
-import sequelize from "../database/models";
+import * as Sequelize from 'sequelize';
+import sequelize from '../database/models';
 import { ITransaction, ITransactionService,
-   ITransactionBody, ITransactionWithUsernames } from "../interfaces/transactionsInterfaces";
-import Transaction from "../database/models/Transaction";
-import Account from "../database/models/Account";
-import transactionValidate from "../validations/accountValidate";
-import userTransactionsReturn from "../helpers/userTransactionsReturn";
+  ITransactionBody, ITransactionWithUsernames } from '../interfaces/transactionsInterfaces';
+import Transaction from '../database/models/Transaction';
+import Account from '../database/models/Account';
+import transactionValidate from '../validations/accountValidate';
+import userTransactionsReturn from '../helpers/userTransactionsReturn';
 
 export default class TransactionService implements ITransactionService {
-   createTransaction = async (transaction: ITransactionBody): Promise<ITransaction | undefined> => {
-    const { debitedAccountId, username, value } = transaction;
+  createTransaction = async (transactionBody: ITransactionBody)
+  : Promise<ITransaction | undefined> => {
+    const { debitedAccountId, username, value } = transactionBody;
      
     const creditedAccountId = await transactionValidate(debitedAccountId, username, value);
     
@@ -18,15 +19,18 @@ export default class TransactionService implements ITransactionService {
     try {
       const transaction = await Transaction.create(
         { debitedAccountId, creditedAccountId, value, createdAt: new Date() },
-        { transaction: t });
+        { transaction: t },
+      );
 
       await Account.update( 
-        { balance: Sequelize.literal(`balance - ${value}`)},
-        { where: { id: debitedAccountId }, transaction: t });
+        { balance: Sequelize.literal(`balance - ${value}`) },
+        { where: { id: debitedAccountId }, transaction: t },
+      );
 
       await Account.update(
-        { balance: Sequelize.literal(`balance + ${value}`)},
-        { where: { id: creditedAccountId }, transaction: t });
+        { balance: Sequelize.literal(`balance + ${value}`) },
+        { where: { id: creditedAccountId }, transaction: t },
+      );
       
       await t.commit();
 
@@ -41,12 +45,12 @@ export default class TransactionService implements ITransactionService {
       where: {
         [Sequelize.Op.or]: [
           {
-            debitedAccountId: accountId
+            debitedAccountId: accountId,
           },
           {
-            creditedAccountId: accountId
-          }
-        ]
+            creditedAccountId: accountId,
+          },
+        ],
       },
     });
 
@@ -57,40 +61,41 @@ export default class TransactionService implements ITransactionService {
     }
 
     return await userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
-  } 
+  }; 
 
   private getTransactionByDate = async (accountId: number, date: string)
   : Promise<ITransactionWithUsernames[]> => {
-      const userTransactions = await Transaction.findAll({
+    const userTransactions = await Transaction.findAll({
       where: {
         [Sequelize.Op.or]: [
           {
-            debitedAccountId: accountId
+            debitedAccountId: accountId,
           },
           {
-            creditedAccountId: accountId
-          }
+            creditedAccountId: accountId,
+          },
         ],
-        createdAt: date
+        createdAt: date,
       },  
     });
 
     return await userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
-  }
+  };
 
-  private getTransactionByCashoutOrCashinAndDate = async (
-    accountId: number, date: string, transaction: string): Promise<ITransactionWithUsernames[]> => {
-      
-    const accountIdString = transaction.toLowerCase() === 'cashout' ? 'debitedAccountId' : 'creditedAccountId';
+  // eslint-disable-next-line max-len
+  private getTransactionByCashoutOrCashinAndDate = async (accountId: number, date: string, transaction: string)
+  : Promise<ITransactionWithUsernames[]> => {
+    const accountIdString = transaction.toLowerCase() === 'cashout'
+      ? 'debitedAccountId' : 'creditedAccountId';
     let userTransactions = [] as Transaction[];
 
     if (date) {
       userTransactions = await Transaction.findAll({
         where: {
           [accountIdString]: accountId,
-          createdAt: date
+          createdAt: date,
         },
-      }) as Transaction[];
+      }) as Transaction[]; 
     }
     if (!date) {
       userTransactions = await Transaction.findAll({
@@ -101,16 +106,14 @@ export default class TransactionService implements ITransactionService {
     }
 
     return await userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
-  }
-
+  };
  
   getFilteredTransactions = async (accountId: number, date: string, transaction: string)
   : Promise<ITransactionWithUsernames[] | undefined> => {
-
     if (date && !transaction) {
       return this.getTransactionByDate(accountId, date);
     }
  
     return this.getTransactionByCashoutOrCashinAndDate(accountId, date, transaction);
-  }
+  };
 } 

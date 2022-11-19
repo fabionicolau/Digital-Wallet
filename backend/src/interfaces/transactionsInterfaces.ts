@@ -20,5 +20,6 @@ export interface ITransactionBody {
 export interface ITransactionService {
   createTransaction(transaction: ITransactionBody): Promise<ITransaction | undefined>;
   getAllTransactions(accountId: number): Promise<ITransactionWithUsernames[]>;
-  getFilteredTransactions(accountId: number, date: string, transaction: string): Promise<ITransactionWithUsernames[] | undefined>;
+  getFilteredTransactions(accountId: number, date: string, transaction: string)
+  : Promise<ITransactionWithUsernames[] | undefined>;
 }

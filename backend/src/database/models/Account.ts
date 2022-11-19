@@ -1,7 +1,6 @@
 import { Model, INTEGER, DECIMAL } from 'sequelize';
 import db from '.';
 
-
 class Account extends Model {
   id!: number;
   balance!: number;
@@ -25,6 +24,5 @@ Account.init({
   modelName: 'Account',
   tableName: 'Accounts',
 });
-
 
 export default Account;

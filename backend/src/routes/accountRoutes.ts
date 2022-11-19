@@ -6,5 +6,4 @@ const router = Router();
 
 router.get('/balance', authMiddleware, newAccountController.getBalance);
 
-
 export default router;

@@ -3,7 +3,6 @@ import userRoutes from './routes/userRoutes';
 import accountRoutes from './routes/accountRoutes';
 import transactionsRoutes from './routes/transactionsRoutes';
 
-
 class App {
   public app: express.Express;
 
@@ -12,10 +11,10 @@ class App {
 
     this.config();
     this.router();
-
+    
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
-
+  
   private config():void {
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
@@ -23,11 +22,11 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-
+    
     this.app.use(express.json());
     this.app.use(accessControl);
   }
-
+  
   private router():void {
     this.app.use(userRoutes);
     this.app.use(accountRoutes);
