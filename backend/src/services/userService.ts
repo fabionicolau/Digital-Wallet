@@ -5,6 +5,7 @@ import User from '../database/models/User';
 import Account from '../database/models/Account';
 import userLoginValidate from '../validations/userLoginValidate';
 import sequelize from '../database/models';
+import isUsernameAlreadyExists from '../validations/isUsernameExists';
  
 
 export default class UserService implements IUserService {
@@ -31,13 +32,8 @@ export default class UserService implements IUserService {
 
   userRegister = async ({ username, password }: IUserLogin): Promise<IUserReturn | undefined > => {
       userLoginValidate({ username, password });
-      const isUsernameExists = await User.findOne({ where: { username } });
+      await isUsernameAlreadyExists(username);
 
-      if (isUsernameExists) {
-        const error = new Error('Username already exists');
-        error.name = 'conflict';
-        throw error;
-      }
       const hashedPassword = await bcrypt.hash(password, 10);
       const t = await sequelize.transaction();
       try {

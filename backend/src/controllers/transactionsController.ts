@@ -24,7 +24,6 @@ export default class TransactionController {
   
       res.status(200).json(allTransactions);
     } catch (error) {
-      console.log(error)
       errorHandler(error as Error, req, res);    
     }
   }

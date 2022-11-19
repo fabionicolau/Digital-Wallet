@@ -71,7 +71,7 @@ export default class TransactionService implements ITransactionService {
             creditedAccountId: accountId
           }
         ],
-        createdAt: new Date(date)
+        createdAt: date
       },  
     });
 
@@ -88,7 +88,7 @@ export default class TransactionService implements ITransactionService {
       userTransactions = await Transaction.findAll({
         where: {
           [accountIdString]: accountId,
-          createdAt: new Date(date)
+          createdAt: date
         },
       }) as Transaction[];
     }
