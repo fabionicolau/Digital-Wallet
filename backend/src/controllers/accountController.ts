@@ -3,7 +3,7 @@ import errorHandler from '../middlewares/errorHandler';
 import { IAccountService } from '../interfaces/accountInterfaces';
 
 export default class AccountController {
-  constructor(private accountService: IAccountService<number>) { }
+  constructor(private accountService: IAccountService) { }
 
   getBalance = async (req: Request, res: Response): Promise<void> => {
     try {

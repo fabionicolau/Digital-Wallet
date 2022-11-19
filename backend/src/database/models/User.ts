@@ -29,7 +29,7 @@ User.init({
     type: INTEGER,
     allowNull: false,
     references: {
-      model: "Accounts",
+      model: 'Accounts',
       key: 'id',
     },
   },

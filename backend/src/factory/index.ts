@@ -1,4 +1,4 @@
- import UserService from '../services/userService';
+import UserService from '../services/userService';
 import UserController from '../controllers/userController';
 import AccountController from '../controllers/accountController';
 import AccountService from '../services/accountService';
@@ -12,7 +12,6 @@ const newUserController = new UserController(newUserService);
 // accountInjection
 const newAccountService = new AccountService();
 const newAccountController = new AccountController(newAccountService);
-
 
 // transactionInjection
 const newTransactionService = new TransactionService();

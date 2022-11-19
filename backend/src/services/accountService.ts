@@ -2,16 +2,16 @@ import { IAccountService, IUserAccount, IUserBalance } from '../interfaces/accou
 import Account from '../database/models/Account';
 import User from '../database/models/User';
 
-export default class AccountService implements IAccountService<IUserBalance> {
+export default class AccountService implements IAccountService {
   getBalance = async (id: number): Promise<IUserBalance> => {
     const user = await User.findOne({
-      where: { id: id },
+      where: { id },
       include: [
         {
           model: Account,
           as: 'account',
-          attributes: ['balance'] ,
-    }],
+          attributes: ['balance'],
+        }],
     }) as IUserAccount | null;
     
     if (!user) {

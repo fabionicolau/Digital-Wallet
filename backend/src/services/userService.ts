@@ -6,7 +6,6 @@ import Account from '../database/models/Account';
 import userLoginValidate from '../validations/userLoginValidate';
 import sequelize from '../database/models';
 import isUsernameAlreadyExists from '../validations/isUsernameExists';
- 
 
 export default class UserService implements IUserService {
   userLogin = async ({ username, password }: IUserLogin): Promise<IUserReturn | null> => {
@@ -26,19 +25,22 @@ export default class UserService implements IUserService {
       id: user.id,
       username: user.username,
       accountId: user.accountId,
-      token 
+      token, 
     } as IUserReturn;
   };
 
   userRegister = async ({ username, password }: IUserLogin): Promise<IUserReturn | undefined > => {
-      userLoginValidate({ username, password });
-      await isUsernameAlreadyExists(username);
+    userLoginValidate({ username, password });
+    await isUsernameAlreadyExists(username);
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const t = await sequelize.transaction();
-      try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const t = await sequelize.transaction();
+    try {
       const { id } = await Account.create({ balance: 100 }, { transaction: t });
-      const user = await User.create({ username, password: hashedPassword, accountId: id }, { transaction: t });
+      const user = await User.create(
+        { username, password: hashedPassword, accountId: id },
+        { transaction: t },
+      );
       
       await t.commit();
       
@@ -48,10 +50,10 @@ export default class UserService implements IUserService {
         id: user.id,
         username: user.username,
         accountId: user.accountId,
-        token 
-      } as IUserReturn;;    
-      } catch (error) {
-        await t.rollback();
-      }
+        token, 
+      } as IUserReturn;    
+    } catch (error) {
+      await t.rollback();
+    }
   };
 }

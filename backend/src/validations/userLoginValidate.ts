@@ -7,11 +7,12 @@ const userLoginValidate = ({ username, password }: IUserLogin): IUserLogin => {
       'string.empty': 'All fields must be filled',
       'string.min': 'username must be at least 3 characters long',
     }),
-    password: Joi.string().min(8).regex((/(?=.*[A-Z])(?=.*\d)/)).required().messages({
-      'string.empty': 'All fields must be filled',
-      'string.min': 'password must be at least 8 characters long',
-      'string.pattern.base': 'password must contain at least one uppercase letter and one number',
-    }),
+    password: Joi.string().min(8).regex((/(?=.*[A-Z])(?=.*\d)/)).required()
+      .messages({
+        'string.empty': 'All fields must be filled',
+        'string.min': 'password must be at least 8 characters long',
+        'string.pattern.base': 'password must contain at least one uppercase letter and one number',
+      }),
   });
 
   const { error, value } = schema.validate({ username, password });

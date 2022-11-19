@@ -21,7 +21,7 @@ Transaction.init({
     type: INTEGER,
     allowNull: false,
     references: {
-      model: "Accounts",
+      model: 'Accounts',
       key: 'id',
     },
   },
@@ -29,7 +29,7 @@ Transaction.init({
     type: INTEGER,
     allowNull: false,
     references: {
-      model: "Accounts",
+      model: 'Accounts',
       key: 'id',
     },
   },
