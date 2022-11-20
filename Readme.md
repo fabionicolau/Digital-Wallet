@@ -26,7 +26,7 @@
   * `npm install` para instalar as dependências;
   * `npm run compose:up` na raiz do projeto para rodar o container;
 
-  <h4>Backend:<h4>
+  <h4>Backend:</h4>
 
   * `npm install` na pasta 'backend' para instalar as dependências;
   * `npm run dev` na pasta 'back end' para rodar o servidor em modo de desenvolvimento;
