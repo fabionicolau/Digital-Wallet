@@ -19,11 +19,11 @@
       "files": ["*.ts"]
       }
   ],
-  "parserOptions": {
-      "ecmaVersion": 2019,
-      "sourceType": "module",
-      "project": "./tsconfig.json"
-  },
+  // "parserOptions": {
+  //     "ecmaVersion": 2019,
+  //     "sourceType": "module",
+  //     "project": "./tsconfig.json"
+  // },
   "plugins": ["@typescript-eslint", "sonarjs", "editorconfig", "mocha"],
   "rules": {
       "no-underscore-dangle": "off",
