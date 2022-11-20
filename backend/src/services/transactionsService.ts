@@ -54,12 +54,6 @@ export default class TransactionService implements ITransactionService {
       },
     });
 
-    if (!userTransactions.length) {
-      const error = new Error('No transactions found');
-      error.name = 'notFound';
-      throw error;
-    }
-
     return await userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
   }; 
 
