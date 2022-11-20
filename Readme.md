@@ -7,7 +7,7 @@
 
   No backend, devem ser implementadas rotas para login, cadastro, conferência de saldo disponível, transfências entre contas e busca por data e/ou entrada e saída de valores.
 
-  No frontend, devem ser implementadas telas para login, cadastro e uma tela com seção para realizaçãp das transferências, bem como uma tabela com todas as transferências realizadas. Também deve ser possível filtrar por data e/ou entrada e saída de valores.
+  No frontend, devem ser implementadas telas para login, cadastro e uma tela com seção para realização das transferências, bem como uma tabela com todas as transferências realizadas. Também deve ser possível filtrar por data e/ou entrada e saída de valores.
 
 </details>
 
@@ -26,7 +26,7 @@
   * `npm install` para instalar as dependências;
   * `npm run compose:up` na raiz do projeto para rodar o container;
 
-  - Backend:
+  <h4>Backend:<h4>
 
   * `npm install` na pasta 'backend' para instalar as dependências;
   * `npm run dev` na pasta 'back end' para rodar o servidor em modo de desenvolvimento;
@@ -34,7 +34,7 @@
   * O projeto está configurado para rodar na porta `http://localhost:3001/`.  
   * Uma documentação do projeto em backend está disponível em `https://documenter.getpostman.com/view/21539124/2s8YmSrL7v`.
 
-  - Frontend:
+  <h4>Frontend:</h4>
 
   * `npm install` na pasta 'frontend' para instalar as dependências;
   * `npm start` na pasta 'frontend' para rodar o servidor em modo de desenvolvimento;
@@ -45,14 +45,14 @@
 <details>
   <summary>Tecnologias utilizadas</summary>
 
-  - Geral:
+  <h4>Geral:</h4>
 
   <ul>
     <li>Docker</li>
     <li>Docker Compose</li>
   </ul>
 
-  - Backend:
+  <h4>Backend:</h4>
 
   <ul>
     <li>Node.js</li>
@@ -65,7 +65,7 @@
     <li>Postman</li>
   </ul>
 
-  - Frontend:
+  <h4>Frontend:</h4>
 
   <ul>
     <li>React</li>
@@ -76,7 +76,7 @@
 </details>
 
 <details>
-  <summary>Melhorias></summary>
+  <summary>Melhorias</summary>
 
   - Implementar testes unitários;
   - Implementar testes de integração; 
