@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../Pages/login';
 import Register from '../Pages/register';
+import Transactions from '../Pages/transactions';
 import NotFound from '../Pages/notFound';
 
 function AppRoutes() {
@@ -10,6 +11,7 @@ function AppRoutes() {
         <Route exact path="/" element={ <Navigate to="/login" replace /> } />
         <Route path="/login" exact element={ <Login /> } />
         <Route path="/register" exact element={ <Register /> } />
+        <Route path="/transactions" exact element={ <Transactions /> } />
         <Route path="/NotFound" element={ <NotFound /> } />
         <Route path="*" element={ <Navigate to="/NotFound" replace /> } />
       </Routes>
