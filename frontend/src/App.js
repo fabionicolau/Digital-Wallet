@@ -1,9 +1,12 @@
 import React from 'react';
 import AppRoutes from './Routes';
+import LoginProvider from './Context/provider';
 
 function App() {
   return (
-    <AppRoutes />
+    <LoginProvider>
+      <AppRoutes />
+    </LoginProvider>
   );
 }
 

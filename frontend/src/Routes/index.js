@@ -8,7 +8,8 @@ function AppRoutes() {
       <Routes>
         <Route exact path="/" element={ <Navigate to="/login" replace /> } />
         <Route path="/login" exact element={ <Login /> } />
-        <Route path="*" element={ <NotFound /> } />
+        <Route path="/NotFound" element={ <NotFound /> } />
+        <Route path="*" element={ <Navigate to="/NotFound" replace /> } />
       </Routes>
     </BrowserRouter>
   );
