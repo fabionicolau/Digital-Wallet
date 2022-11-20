@@ -43,7 +43,7 @@
 </details>
 
 <details>
-  <summary>Tecnologias utilizadas</summary>
+  <summary><strong>Tecnologias utilizadas</strong></summary>
 
   <h4>Geral:</h4>
 
@@ -76,7 +76,7 @@
 </details>
 
 <details>
-  <summary>Melhorias</summary>
+  <summary><strong>Melhorias</strong></summary>
 
   - Implementar testes unitários;
   - Implementar testes de integração; 
