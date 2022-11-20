@@ -1,12 +1,12 @@
 import React from 'react';
 import AppRoutes from './Routes';
-import LoginProvider from './Context/provider';
+import FormInputsContext from './Context/FormInputsContext/provider';
 
 function App() {
   return (
-    <LoginProvider>
+    <FormInputsContext>
       <AppRoutes />
-    </LoginProvider>
+    </FormInputsContext>
   );
 }
 

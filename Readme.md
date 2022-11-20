@@ -29,15 +29,13 @@
   <h4>Backend:</h4>
 
   * `npm install` na pasta 'backend' para instalar as dependências;
-  * `npm run dev` na pasta 'back end' para rodar o servidor em modo de desenvolvimento;
-  * `npm start` nas pasta 'back end' para rodar o servidor em modo de produção;
+  * `npm run dev` na pasta 'back end' se quiser rodar o servidor em modo de desenvolvimento;
   * O projeto está configurado para rodar na porta `http://localhost:3001/`.  
   * Uma documentação do projeto em backend está disponível em <a href='https://documenter.getpostman.com/view/21539124/2s8YmSrL7v' target='_blank'>`https://documenter.getpostman.com/view/21539124/2s8YmSrL7v`</a>.
 
   <h4>Frontend:</h4>
 
   * `npm install` na pasta 'frontend' para instalar as dependências;
-  * `npm start` na pasta 'frontend' para rodar o servidor em modo de desenvolvimento;
   * O projeto está configurado para rodar na porta `http://localhost:3000/`.
 
 </details>
