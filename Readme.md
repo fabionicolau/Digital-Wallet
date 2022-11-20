@@ -32,7 +32,7 @@
   * `npm run dev` na pasta 'back end' para rodar o servidor em modo de desenvolvimento;
   * `npm start` nas pasta 'back end' para rodar o servidor em modo de produção;
   * O projeto está configurado para rodar na porta `http://localhost:3001/`.  
-  * Uma documentação do projeto em backend está disponível em `https://documenter.getpostman.com/view/21539124/2s8YmSrL7v`.
+  * Uma documentação do projeto em backend está disponível em <a href='https://documenter.getpostman.com/view/21539124/2s8YmSrL7v' target='_blank'>`https://documenter.getpostman.com/view/21539124/2s8YmSrL7v`</a>.
 
   <h4>Frontend:</h4>
 
