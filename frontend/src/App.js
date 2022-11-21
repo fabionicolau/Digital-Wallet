@@ -1,12 +1,15 @@
 import React from 'react';
 import AppRoutes from './Routes';
 import FormInputsContext from './Context/FormInputsContext/provider';
+import TransactionsProvider from './Context/TransactionsContext/provider';
 
 function App() {
   return (
-    <FormInputsContext>
-      <AppRoutes />
-    </FormInputsContext>
+    <TransactionsProvider>
+      <FormInputsContext>
+        <AppRoutes />
+      </FormInputsContext>
+    </TransactionsProvider>
   );
 }
 

@@ -3,7 +3,7 @@ import Transaction from '../database/models/Transaction';
 
 const userTransactionsReturn = (userTransactions: Transaction[]) => {
   if (!userTransactions.length) {
-    const error = new Error('No transactions found');
+    const error = new Error('Transação não encontrada');
     error.name = 'notFound';
     throw error; 
   }

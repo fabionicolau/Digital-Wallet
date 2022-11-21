@@ -15,7 +15,7 @@ export default class AccountService implements IAccountService {
     }) as IUserAccount | null;
     
     if (!user) {
-      const error = new Error('Account not found');
+      const error = new Error('Conta não encontrada');
       error.name = 'notFound';
       throw error;
     }

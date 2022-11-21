@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import FormInputsContext from '../../Context/FormInputsContext/context';
 
 function FormInputs({ page }) {
-  const { username, setUsername, userPassword, setUserPassword,
-    isUsernameInValid, setIsUsernameInValid } = useContext(FormInputsContext);
+  const { username, setUsername,
+    userPassword, setUserPassword } = useContext(FormInputsContext);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -40,18 +41,16 @@ function FormInputs({ page }) {
     });
     const response = await request.json();
 
-    if (response.message === 'Incorrect username or password') {
-      return setIsUsernameInValid(true);
+    if (!response?.id) {
+      return setErrorMessage(response.message);
     }
 
     localStorage.setItem('user', JSON.stringify(response));
-    setIsUsernameInValid(false);
-
     return navigate('/transactions');
   }
 
   return (
-    <form className="loginForm">
+    <form className="Form">
       <h3 className="titleForm">
         { page === 'login' ? 'Login' : 'Cadastro' }
       </h3>
@@ -82,8 +81,11 @@ function FormInputs({ page }) {
             className="inputForm"
           />
         </label>
-        { isUsernameInValid
-      && <p>Nome de usuário ou senha inválidos</p> }
+        {errorMessage && (
+          <div>
+            <p>{ errorMessage }</p>
+          </div>
+        )}
 
         <button
           type="submit"
@@ -97,7 +99,11 @@ function FormInputs({ page }) {
         { page === 'login' && (
           <button
             type="button"
-            onClick={ () => { navigate('/register'); } }
+            onClick={ () => {
+              navigate('/register');
+              setUserPassword('');
+              setUsername('');
+            } }
             className="FormButton"
           >
             Ainda não tenho conta

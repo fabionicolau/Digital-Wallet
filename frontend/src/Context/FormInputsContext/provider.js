@@ -6,18 +6,15 @@ import FormInputsContext from './context';
 function LoginProvider({ children }) {
   const [username, setUsername] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [isUsernameInValid, setIsUsernameInValid] = useState(false);
 
   const memo = useMemo(
     () => ({
       username,
       userPassword,
-      isUsernameInValid,
       setUsername,
       setUserPassword,
-      setIsUsernameInValid,
     }),
-    [username, userPassword, isUsernameInValid],
+    [username, userPassword],
   );
 
   return (
