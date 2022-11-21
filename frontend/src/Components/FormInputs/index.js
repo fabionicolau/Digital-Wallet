@@ -1,7 +1,11 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useContext, useEffect } from 'react';
 import Proptypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import FormInputsContext from '../../Context/FormInputsContext/context';
+import logo from '../../images/logo.png';
+import * as S from './style';
 
 function FormInputs({ page }) {
   const { username, setUsername,
@@ -50,15 +54,19 @@ function FormInputs({ page }) {
   }
 
   return (
-    <form className="Form">
-      <h3 className="titleForm">
-        { page === 'login' ? 'Login' : 'Cadastro' }
-      </h3>
+    <S.Form>
+      <S.ImgDiv>
+        <img src={ logo } alt="logo da empresa" className="logo" />
+      </S.ImgDiv>
 
-      <div className="container">
+      <S.TitleForm>
+        { page === 'login' ? 'Login' : 'Cadastro' }
+      </S.TitleForm>
+
+      <S.Container className="container">
         <label htmlFor="username-input">
           Nome de usuário
-          <input
+          <S.InputForm
             id="username-input"
             type="text"
             name="username"
@@ -71,7 +79,7 @@ function FormInputs({ page }) {
 
         <label htmlFor="password-input">
           Senha
-          <input
+          <S.InputForm
             id="password-input"
             type="password"
             name="password"
@@ -87,17 +95,17 @@ function FormInputs({ page }) {
           </div>
         )}
 
-        <button
+        <S.ButtonForm
           type="submit"
           disabled={ isDisabled }
           onClick={ handleLoginSubmit }
           className="FormButton"
         >
           { page === 'login' ? 'Entrar' : 'Cadastrar' }
-        </button>
+        </S.ButtonForm>
 
         { page === 'login' && (
-          <button
+          <S.ButtonForm
             type="button"
             onClick={ () => {
               navigate('/register');
@@ -107,10 +115,10 @@ function FormInputs({ page }) {
             className="FormButton"
           >
             Ainda não tenho conta
-          </button>
+          </S.ButtonForm>
         ) }
-      </div>
-    </form>
+      </S.Container>
+    </S.Form>
   );
 }
 

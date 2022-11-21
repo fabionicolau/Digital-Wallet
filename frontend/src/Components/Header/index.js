@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TransactionsContext from '../../Context/TransactionsContext/context';
 import FormInputsContext from '../../Context/FormInputsContext/context';
+import * as S from './style';
 
 function Header() {
   const [balance, setBalance] = useState(0);
@@ -36,18 +37,25 @@ function Header() {
   };
 
   return (
-    <header>
-      <h1>NG.CASH</h1>
-      <h3>{ `Usuário: ${user.username}` }</h3>
-      <h3>{ `Saldo: ${balance} `}</h3>
-
-      <button
-        type="button"
-        onClick={ logOut }
-      >
-        Sair
-      </button>
-    </header>
+    <S.HeaderContainer>
+      <S.LogoContainer>
+        <h1>NG.CASH</h1>
+      </S.LogoContainer>
+      <S.UserNameContainter>
+        <p>{ `Usuário: ${user.username}` }</p>
+        <S.ValueContainer>
+          <p>{ `Saldo: ${balance} `}</p>
+        </S.ValueContainer>
+        <div>
+          <button
+            type="button"
+            onClick={ logOut }
+          >
+            Sair
+          </button>
+        </div>
+      </S.UserNameContainter>
+    </S.HeaderContainer>
   );
 }
 
