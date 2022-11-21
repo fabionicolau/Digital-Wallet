@@ -14,7 +14,7 @@ export default class UserService implements IUserService {
     const user = await User.findOne({ where: { username } });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      const error = new Error('Incorrect username or password');
+      const error = new Error('usuário ou senha inválidos');
       error.name = 'unauthorized';
       throw error;
     }

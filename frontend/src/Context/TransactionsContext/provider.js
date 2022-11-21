@@ -5,19 +5,16 @@ import TransactionsContext from './context';
 
 function TransacionsProvider({ children }) {
   const [transactions, setTransactions] = useState([]);
-  const [cashInOrOut, setCashInOrOut] = useState('');
-  const [date, setDate] = useState('');
+  const [updateTransactions, setUpdateTransactions] = useState('');
 
   const memo = useMemo(
     () => ({
       transactions,
-      cashInOrOut,
-      date,
+      updateTransactions,
       setTransactions,
-      setCashInOrOut,
-      setDate,
+      setUpdateTransactions,
     }),
-    [transactions, cashInOrOut, date],
+    [transactions, updateTransactions],
   );
 
   return (

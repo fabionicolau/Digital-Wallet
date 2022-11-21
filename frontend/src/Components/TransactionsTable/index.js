@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import TransactionsContext from '../../Context/TransactionsContext/context';
 
 function Transactions() {
-  const { transactions, setTransactions } = useContext(TransactionsContext);
+  const { transactions, setTransactions,
+    updateTransactions } = useContext(TransactionsContext);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -17,11 +18,16 @@ function Transactions() {
       setTransactions(response);
     };
     fetchTransactions();
-  }, [setTransactions]);
+  }, [setTransactions, updateTransactions]);
 
   // const formatDate = (date) => {
-  //   const date = newDate(date);
-  // }
+  //   const newDate = new Date(date);
+  //   const day = newDate.getDate() + 1;
+  //   const month = newDate.getMonth() + 1;
+  //   const year = newDate.getFullYear();
+  //   return `${day}/${month}/${year}`;
+  //   // return newDate.toLocaleDateString('pt-br');
+  // };
 
   return (
     <div>
@@ -30,21 +36,19 @@ function Transactions() {
       <table>
         <thead>
           <tr>
-            <th>id</th>
-            <th>Pagou</th>
-            <th>Recebeu</th>
-            <th>Valor</th>
             <th>Data</th>
+            <th>Pagador</th>
+            <th>Recebedor</th>
+            <th>Valor</th>
           </tr>
         </thead>
         <tbody>
           {transactions.length > 0 && transactions.map((transaction) => (
             <tr key={ transaction.id }>
-              <td>{transaction.id}</td>
+              <td>{transaction.createdAt}</td>
               <td>{transaction.debitedUserName}</td>
               <td>{transaction.creditedUserName}</td>
               <td>{transaction.value}</td>
-              <td>{transaction.createdAt}</td>
             </tr>
           ))}
         </tbody>

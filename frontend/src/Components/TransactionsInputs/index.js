@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import TransactionsContext from '../../Context/TransactionsContext/context';
 
 function TransactionsInputs() {
   const [username, setUsername] = useState('');
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { setUpdateTransactions } = useContext(TransactionsContext);
+
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const handleSubmit = async () => {
     const response = await fetch('http://localhost:3001/transaction', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: JSON.parse(localStorage.getItem('user')).token,
+        Authorization: user.token,
       },
       body: JSON.stringify({
         username,
@@ -18,9 +22,11 @@ function TransactionsInputs() {
       }),
     });
     const data = await response.json();
-    if (!data.message.id) {
-      setErrorMessage(data.message);
+    console.log(data);
+    if (!data?.id) {
+      return setErrorMessage(data.message);
     }
+    setUpdateTransactions(data);
   };
 
   return (
@@ -43,7 +49,7 @@ function TransactionsInputs() {
             type="number"
             id="value"
             name="value"
-            min={ 1 }
+            min="0"
             value={ value }
             onChange={ (event) => setValue(event.target.value) }
           />

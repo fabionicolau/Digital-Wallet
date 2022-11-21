@@ -6,25 +6,25 @@ const transactionValidate = async (accountId: number, creditedUserName: string, 
   const creditedUser = await User.findOne({ where: { username: creditedUserName } });
 
   if (value <= 0) {
-    const error = new Error('Value must be greater than 0');
+    const error = new Error('O valor deve ser maior do que 0');
     error.name = 'conflict';
     throw error;
   }
 
   if (!creditedUser) {
-    const error = new Error('Credited account not found');
+    const error = new Error('Usuário não encontrado');
     error.name = 'notFound';
     throw error;
   }
 
   if (accountId === creditedUser.accountId) {
-    const error = new Error('You cannot transfer to the same account');
+    const error = new Error('Você não pode transferir para a sua própria conta');
     error.name = 'conflict';
     throw error; 
   }
 
-  if (debitedAccount && debitedAccount.balance < value) {
-    const error = new Error('Insufficient balance');
+  if (debitedAccount && debitedAccount.balance < Number(value)) {
+    const error = new Error('Saldo insuficiente');
     error.name = 'conflict';
     throw error;
   }
