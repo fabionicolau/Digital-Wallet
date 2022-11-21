@@ -5,7 +5,7 @@ function FilterInputs() {
   const [date, setDate] = useState('');
   const [cashInOrOut, setCashInOrOut] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const { setTransactions } = useContext(TransactionsContext);
+  const { setTransactions, setTransactionNotFound } = useContext(TransactionsContext);
 
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -22,8 +22,10 @@ function FilterInputs() {
     setTransactions(data);
 
     if (!data[0]?.id) {
+      setTransactionNotFound(true);
       return setErrorMessage(data.message);
     }
+    // setTransactionNotFound(false);
   };
 
   return (

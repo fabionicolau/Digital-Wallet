@@ -3,7 +3,7 @@ import TransactionsContext from '../../Context/TransactionsContext/context';
 
 function Transactions() {
   const { transactions, setTransactions,
-    updateTransactions } = useContext(TransactionsContext);
+    updateTransactions, transactionNotFound } = useContext(TransactionsContext);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -20,15 +20,7 @@ function Transactions() {
     fetchTransactions();
   }, [setTransactions, updateTransactions]);
 
-  // const formatDate = (date) => {
-  //   const newDate = new Date(date);
-  //   const day = newDate.getDate() + 1;
-  //   const month = newDate.getMonth() + 1;
-  //   const year = newDate.getFullYear();
-  //   return `${day}/${month}/${year}`;
-  //   // return newDate.toLocaleDateString('pt-br');
-  // };
-
+  if (transactionNotFound) return '';
   return (
     <div>
       <h1>Transactions</h1>

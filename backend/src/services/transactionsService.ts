@@ -104,10 +104,12 @@ export default class TransactionService implements ITransactionService {
  
   getFilteredTransactions = async (accountId: number, date: string, transaction: string)
   : Promise<ITransactionWithUsernames[] | undefined> => {
+    if (!date && !transaction) {
+      return this.getAllTransactions(accountId);
+    }
     if (date && !transaction) {
       return this.getTransactionByDate(accountId, date);
     }
- 
     return this.getTransactionByCashoutOrCashinAndDate(accountId, date, transaction);
   };
 } 

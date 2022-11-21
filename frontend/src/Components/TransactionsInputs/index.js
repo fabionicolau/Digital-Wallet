@@ -22,7 +22,6 @@ function TransactionsInputs() {
       }),
     });
     const data = await response.json();
-    console.log(data);
     if (!data?.id) {
       return setErrorMessage(data.message);
     }

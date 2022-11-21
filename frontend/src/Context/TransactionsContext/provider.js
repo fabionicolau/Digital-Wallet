@@ -6,15 +6,18 @@ import TransactionsContext from './context';
 function TransacionsProvider({ children }) {
   const [transactions, setTransactions] = useState([]);
   const [updateTransactions, setUpdateTransactions] = useState('');
+  const [transactionNotFound, setTransactionNotFound] = useState(false);
 
   const memo = useMemo(
     () => ({
       transactions,
       updateTransactions,
+      transactionNotFound,
       setTransactions,
       setUpdateTransactions,
+      setTransactionNotFound,
     }),
-    [transactions, updateTransactions],
+    [transactionNotFound, transactions, updateTransactions],
   );
 
   return (
