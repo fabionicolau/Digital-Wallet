@@ -38,23 +38,35 @@ function Header() {
 
   return (
     <S.HeaderContainer>
-      <S.LogoContainer>
-        <h1>NG.CASH</h1>
-      </S.LogoContainer>
-      <S.UserNameContainter>
-        <p>{ `Usuário: ${user.username}` }</p>
-        <S.ValueContainer>
-          <p>{ `Saldo: ${balance} `}</p>
-        </S.ValueContainer>
-        <div>
-          <button
-            type="button"
-            onClick={ logOut }
-          >
-            Sair
-          </button>
-        </div>
-      </S.UserNameContainter>
+      <button
+        type="button"
+        className="content-div"
+      >
+        NG.CASH
+      </button>
+
+      <div className="right">
+        <button
+          type="button"
+          className="content-div"
+        >
+          { `${user.username}` }
+        </button>
+        <button
+          type="button"
+          className="content-div"
+        >
+          { `R$ ${balance} `}
+        </button>
+        <button
+          className="content-div exit"
+          type="button"
+          onClick={ logOut }
+        >
+          Sair
+        </button>
+      </div>
+
     </S.HeaderContainer>
   );
 }

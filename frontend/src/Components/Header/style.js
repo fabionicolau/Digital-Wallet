@@ -4,27 +4,39 @@ export const HeaderContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
-  height: 10vh;
+  height: 8vh;
   justify-content: space-between;
   margin: auto;
-  width: 90%;
-`;
+  background-color: #333;
+  overflow: hidden;
 
-export const LogoContainer = styled.div`
-  color: green;
-  display: flex;
-  justify-content: flex-start;
-`;
+  .right {
+    float: right;
+    padding: 0;
+  }
 
-export const UserNameContainter = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: 10vh;
-  justify-content: flex-end;
+  div, button {
+    float: left;
+    color: #f5f5f5;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    height: 100%;
+    cursor: none;
+  }
 
-  p {
-    margin-right: 50px;
+  .exit {
+    cursor: pointer;
+  }
+
+  .content-div:hover{
+    background-color: #008B8B;
+    color: black;
+    cursor: pointer;
   }
 `;
 
