@@ -37,7 +37,8 @@
   <h4>Frontend:</h4>
 
   * `npm install` na pasta 'frontend' para instalar as dependências;
-  * `npm start` na pasta 'frontend' para rodar o projeto em modo de desenvolvimento;
+  * `npm start` na pasta 'frontend' se quiser rodar o projeto em modo de desenvolvimento;
+  * A estilização foi feita para ser um aplicativo de celular na resolução 360x640.
   * O projeto está configurado para rodar na porta `http://localhost:3000/`.
 
 </details>

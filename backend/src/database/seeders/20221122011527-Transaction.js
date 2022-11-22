@@ -8,14 +8,14 @@ module.exports = {
         debitedAccountId: 2,
         creditedAccountId: 1,
         value: 10,
-        createdAt: "2022-11-21"
+        createdAt: "2022-11-20"
       },
       {
         id: 2,
         debitedAccountId: 1,
         creditedAccountId: 2,
         value: 10,
-        createdAt: "2022-11-20"
+        createdAt: "2022-11-21"
       },
     ], {});
   },
