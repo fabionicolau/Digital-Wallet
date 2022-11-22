@@ -24,6 +24,7 @@
 
   * Para rodar o projeto, é necessário ter o `docker` e o `docker-compose` instalados;
   * `npm install` para instalar as dependências;
+  * `npm run db:reset` para resetar o banco de dados;
   * `npm run compose:up` na raiz do projeto para rodar o container;
 
   <h4>Backend:</h4>
@@ -36,6 +37,7 @@
   <h4>Frontend:</h4>
 
   * `npm install` na pasta 'frontend' para instalar as dependências;
+  * `npm start` na pasta 'frontend' para rodar o projeto em modo de desenvolvimento;
   * O projeto está configurado para rodar na porta `http://localhost:3000/`.
 
 </details>
@@ -77,6 +79,5 @@
   <summary><strong>Melhorias</strong></summary>
 
   - Implementar testes unitários;
-  - Implementar testes de integração; 
 
 </details>
