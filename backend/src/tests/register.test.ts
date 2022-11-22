@@ -47,17 +47,6 @@ describe('Ao fazer registrar', () => {
     expect(chaiHttpResponse.body.message).to.be.equal('O ususário já existe');
   })
 
-  it('Retorna um erro caso o email ou password sejam inválidos', async () => {
-    const { username } = loginMock;
-    chaiHttpResponse = await chai
-      .request(app)
-      .post('/login')
-      .send({ username, password: '123Seenha' } )
- 
-    expect(chaiHttpResponse.status).to.equal(401);
-    expect(chaiHttpResponse.body.message).to.be.equal('usuário ou senha inválidos');
-  });
-
   it('Retorna um erro caso a senha seja menor que 8 caracteres', async () => {
     const { username } = loginMock;
     chaiHttpResponse = await chai
