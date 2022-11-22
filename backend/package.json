@@ -9,7 +9,8 @@
     "start": "node .",
     "predev": "npm run build && npm run db:reset",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
-    "lint": "eslint ./src --ext .ts"
+    "lint": "eslint ./src --ext .ts",
+    "test": "mocha -r ts-node/register ./src/tests/*$NAME*.{test,spec}.ts -t 10000 --exit"
   },
   "keywords": [],
   "author": "",
