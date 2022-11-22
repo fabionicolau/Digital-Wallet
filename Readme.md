@@ -41,6 +41,22 @@
   * A estilização foi feita para ser um aplicativo de celular na resolução 360x640.
   * O projeto está configurado para rodar na porta `http://localhost:3000/`.
 
+  <h4>Testes:</h4>
+
+  * `npm run test` na pasta 'backend' para rodar os testes.
+
+  <h4>Banco de dados:</h4>
+
+  * Alguns usuários, contas e transações já foram criadas nos seeders.
+  
+  <h5>Exemplos:</h5>
+
+  * username: Fabio
+  * password: 123Senha
+
+  * username: Joao
+  * password: 123Senha
+  
 </details>
 
 <details>
@@ -72,6 +88,14 @@
     <li>React</li>
     <li>Context</li>
     <li>Styled Components</li>
+  </ul>
+
+  <h4>Testes:</h4>
+
+  <ul>
+    <li>Chai</li>
+    <li>chaiHttp</li>
+    <li>Mocha</li>
   </ul>
 
 </details>
