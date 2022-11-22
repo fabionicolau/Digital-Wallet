@@ -5,7 +5,7 @@ import { IUser } from '../interfaces/userInterfaces';
 
 const createToken = (user: IUser): string => {
   const jwtConfig: SignOptions = {
-    expiresIn: '24h',
+    // expiresIn: '24h',
     algorithm: 'HS256',
   };
 

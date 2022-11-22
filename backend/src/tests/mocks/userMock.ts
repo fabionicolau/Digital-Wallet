@@ -9,7 +9,7 @@ export const userLoginMock = {
   id: 1,
   username: 'Fabio',
   accountId: 1,
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJGYWJpbyIsImFjY291bnRJZCI6MSwiaWF0IjoxNjY5MDc1ODgxLCJleHAiOjE2NjkxNjIyODF9.E4BN0COKNZ6-93bUGHy9dmmQZIChc26XgY3yWzK-Ke0'
+  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJGYWJpbyIsImFjY291bnRJZCI6MSwiaWF0IjoxNjY5MDgwMjY1fQ.7pRuC6jTqlAGtS-mFxuYiwG0wwmd6MLTIkGFSkHcTLQ'
 }
 
 

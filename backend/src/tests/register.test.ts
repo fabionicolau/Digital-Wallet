@@ -51,7 +51,7 @@ describe('Ao fazer registrar', () => {
     const { username } = loginMock;
     chaiHttpResponse = await chai
       .request(app)
-      .post('/login')
+      .post('/register')
       .send({ username, password: '123nha' } );
  
     expect(chaiHttpResponse.status).to.equal(400);
@@ -62,7 +62,7 @@ describe('Ao fazer registrar', () => {
     const { username } = loginMock;
     chaiHttpResponse = await chai
       .request(app)
-      .post('/login')
+      .post('/register')
       .send({ username, password: '123senha' } );
  
     expect(chaiHttpResponse.status).to.equal(400);
@@ -73,7 +73,7 @@ describe('Ao fazer registrar', () => {
     const { username } = loginMock;
     chaiHttpResponse = await chai
       .request(app)
-      .post('/login')
+      .post('/register')
       .send({ username, password: '' });
 
     expect(chaiHttpResponse.status).to.equal(400);
