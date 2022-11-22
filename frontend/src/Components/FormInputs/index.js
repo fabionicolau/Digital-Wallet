@@ -1,7 +1,11 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useContext, useEffect } from 'react';
 import Proptypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import FormInputsContext from '../../Context/FormInputsContext/context';
+import logo from '../../images/logo.png';
+import * as S from './style';
 
 function FormInputs({ page }) {
   const { username, setUsername,
@@ -50,14 +54,12 @@ function FormInputs({ page }) {
   }
 
   return (
-    <form className="Form">
-      <h3 className="titleForm">
-        { page === 'login' ? 'Login' : 'Cadastro' }
-      </h3>
+    <S.Form>
+      <div>
+        <S.Container>
 
-      <div className="container">
-        <label htmlFor="username-input">
-          Nome de usuário
+          <img src={ logo } alt="logo da empresa" />
+
           <input
             id="username-input"
             type="text"
@@ -65,12 +67,7 @@ function FormInputs({ page }) {
             placeholder="Nome de usuário"
             value={ username }
             onChange={ (event) => { setUsername(event.target.value); } }
-            className="inputForm"
           />
-        </label>
-
-        <label htmlFor="password-input">
-          Senha
           <input
             id="password-input"
             type="password"
@@ -78,39 +75,35 @@ function FormInputs({ page }) {
             placeholder="Senha"
             value={ userPassword }
             onChange={ (event) => { setUserPassword(event.target.value); } }
-            className="inputForm"
           />
-        </label>
-        {errorMessage && (
-          <div>
-            <p>{ errorMessage }</p>
-          </div>
-        )}
-
-        <button
-          type="submit"
-          disabled={ isDisabled }
-          onClick={ handleLoginSubmit }
-          className="FormButton"
-        >
-          { page === 'login' ? 'Entrar' : 'Cadastrar' }
-        </button>
-
-        { page === 'login' && (
+          {errorMessage && (
+            <div>
+              <p className="error">{ errorMessage }</p>
+            </div>
+          )}
           <button
-            type="button"
-            onClick={ () => {
-              navigate('/register');
-              setUserPassword('');
-              setUsername('');
-            } }
-            className="FormButton"
+            type="submit"
+            disabled={ isDisabled }
+            onClick={ handleLoginSubmit }
           >
-            Ainda não tenho conta
+            { page === 'login' ? 'Entrar' : 'Cadastrar' }
           </button>
-        ) }
+
+          { page === 'login' && (
+            <button
+              type="button"
+              onClick={ () => {
+                navigate('/register');
+                setUserPassword('');
+                setUsername('');
+              } }
+            >
+              Ainda não tenho conta
+            </button>
+          ) }
+        </S.Container>
       </div>
-    </form>
+    </S.Form>
   );
 }
 

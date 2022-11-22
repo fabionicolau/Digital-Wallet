@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useContext } from 'react';
 import TransactionsContext from '../../Context/TransactionsContext/context';
+import * as S from './style';
 
 function TransactionsInputs() {
   const [username, setUsername] = useState('');
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const { setUpdateTransactions } = useContext(TransactionsContext);
 
@@ -25,31 +27,34 @@ function TransactionsInputs() {
     if (!data?.id) {
       return setErrorMessage(data.message);
     }
+    setErrorMessage('');
     setUpdateTransactions(data);
   };
 
   return (
     <div>
-      <h1>Transação Financeira</h1>
-      <form>
+      <S.TitleP>
+        <h2>Transferência</h2>
+      </S.TitleP>
+      <S.TransferContainer>
         <label htmlFor="username">
-          Usuário:
           <input
             type="text"
             id="username"
             name="username"
+            placeholder="usuário"
             value={ username }
             onChange={ (event) => setUsername(event.target.value) }
           />
         </label>
         <label htmlFor="value">
-          Valor:
           <input
             type="number"
             id="value"
             name="value"
             min="0"
             value={ value }
+            placeholder="valor"
             onChange={ (event) => setValue(event.target.value) }
           />
         </label>
@@ -59,11 +64,12 @@ function TransactionsInputs() {
         >
           Enviar
         </button>
-      </form>
+      </S.TransferContainer>
+
       {errorMessage && (
-        <div>
+        <S.TitleP>
           <p>{ errorMessage }</p>
-        </div>
+        </S.TitleP>
       )}
     </div>
   );

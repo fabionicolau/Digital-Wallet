@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import TransactionsContext from '../../Context/TransactionsContext/context';
+import * as S from './style';
 
 function FilterInputs() {
   const [date, setDate] = useState('');
@@ -25,15 +26,17 @@ function FilterInputs() {
       setTransactionNotFound(true);
       return setErrorMessage(data.message);
     }
-    // setTransactionNotFound(false);
+    setErrorMessage('');
+    setTransactionNotFound(false);
   };
 
   return (
     <div>
-      <h1>FilterInputs</h1>
-      <form>
+      <S.TitleP>
+        <h2>Filtrar</h2>
+      </S.TitleP>
+      <S.TransferContainer>
         <label htmlFor="date">
-          Data:
           <input
             type="date"
             id="date"
@@ -43,13 +46,12 @@ function FilterInputs() {
           />
         </label>
         <label htmlFor="cashInOrOut">
-          Tipo de transação:
           <select
             name="cashInOrOut"
             id="cashInOrOut"
             onChange={ (event) => setCashInOrOut(event.target.value) }
           >
-            <option value="" defaultValue="">-Escolha uma opção-</option>
+            <option value="" defaultValue="">Todas</option>
             <option value="cashin">Recebimento</option>
             <option value="cashout">Pagamento</option>
           </select>
@@ -60,10 +62,10 @@ function FilterInputs() {
         >
           Filtrar
         </button>
-      </form>
+      </S.TransferContainer>
       {errorMessage && (
         <div>
-          <p>{ errorMessage }</p>
+          <p align="center">{ errorMessage }</p>
         </div>
       )}
     </div>
