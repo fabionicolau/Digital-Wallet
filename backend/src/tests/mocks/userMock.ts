@@ -5,15 +5,6 @@ export const userMock = {
   accountId: 1,
 }
 
-export const newUserMock = {
-  id: 2,
-  username: 'Antunes',
-  password: '$2a$10$vK.xEZu7m4lUo.DfCsrPeeHZXxw2qoJoRi0y1Ayl8vtXOgJPt8GtO',
-  accountId: 2,
-}
-
-
-
 export const userLoginMock = {
   id: 1,
   username: 'Fabio',
