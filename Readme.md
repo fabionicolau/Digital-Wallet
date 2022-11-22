@@ -56,7 +56,7 @@
 
   * username: Joao
   * password: 123Senha
-  
+
 </details>
 
 <details>
@@ -95,6 +95,7 @@
   <ul>
     <li>Chai</li>
     <li>chaiHttp</li>
+    <li>Sinon</li>
     <li>Mocha</li>
   </ul>
 
