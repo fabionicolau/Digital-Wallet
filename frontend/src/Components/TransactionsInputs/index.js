@@ -5,7 +5,7 @@ import * as S from './style';
 
 function TransactionsInputs() {
   const [username, setUsername] = useState('');
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const { setUpdateTransactions } = useContext(TransactionsContext);
 
@@ -42,7 +42,7 @@ function TransactionsInputs() {
             type="text"
             id="username"
             name="username"
-            placeholder="Digite o nome do usuário"
+            placeholder="usuário"
             value={ username }
             onChange={ (event) => setUsername(event.target.value) }
           />
@@ -54,7 +54,7 @@ function TransactionsInputs() {
             name="value"
             min="0"
             value={ value }
-            placeholder="digite o valor"
+            placeholder="valor"
             onChange={ (event) => setValue(event.target.value) }
           />
         </label>

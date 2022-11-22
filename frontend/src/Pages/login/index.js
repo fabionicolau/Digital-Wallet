@@ -4,9 +4,7 @@ import FormInputs from '../../Components/FormInputs';
 
 function Login() {
   return (
-    <div>
-      <FormInputs page="login" />
-    </div>
+    <FormInputs page="login" />
   );
 }
 

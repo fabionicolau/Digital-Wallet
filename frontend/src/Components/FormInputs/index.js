@@ -55,69 +55,54 @@ function FormInputs({ page }) {
 
   return (
     <S.Form>
-      <S.ImgDiv>
-        <img src={ logo } alt="logo da empresa" className="logo" />
-      </S.ImgDiv>
+      <div>
+        <S.Container>
 
-      <S.TitleForm>
-        { page === 'login' ? 'Login' : 'Cadastro' }
-      </S.TitleForm>
+          <img src={ logo } alt="logo da empresa" />
 
-      <S.Container className="container">
-        <label htmlFor="username-input">
-          Nome de usuário
-          <S.InputForm
+          <input
             id="username-input"
             type="text"
             name="username"
             placeholder="Nome de usuário"
             value={ username }
             onChange={ (event) => { setUsername(event.target.value); } }
-            className="inputForm"
           />
-        </label>
-
-        <label htmlFor="password-input">
-          Senha
-          <S.InputForm
+          <input
             id="password-input"
             type="password"
             name="password"
             placeholder="Senha"
             value={ userPassword }
             onChange={ (event) => { setUserPassword(event.target.value); } }
-            className="inputForm"
           />
-        </label>
-        {errorMessage && (
-          <div>
-            <p>{ errorMessage }</p>
-          </div>
-        )}
-
-        <S.ButtonForm
-          type="submit"
-          disabled={ isDisabled }
-          onClick={ handleLoginSubmit }
-          className="FormButton"
-        >
-          { page === 'login' ? 'Entrar' : 'Cadastrar' }
-        </S.ButtonForm>
-
-        { page === 'login' && (
-          <S.ButtonForm
-            type="button"
-            onClick={ () => {
-              navigate('/register');
-              setUserPassword('');
-              setUsername('');
-            } }
-            className="FormButton"
+          {errorMessage && (
+            <div>
+              <p className="error">{ errorMessage }</p>
+            </div>
+          )}
+          <button
+            type="submit"
+            disabled={ isDisabled }
+            onClick={ handleLoginSubmit }
           >
-            Ainda não tenho conta
-          </S.ButtonForm>
-        ) }
-      </S.Container>
+            { page === 'login' ? 'Entrar' : 'Cadastrar' }
+          </button>
+
+          { page === 'login' && (
+            <button
+              type="button"
+              onClick={ () => {
+                navigate('/register');
+                setUserPassword('');
+                setUsername('');
+              } }
+            >
+              Ainda não tenho conta
+            </button>
+          ) }
+        </S.Container>
+      </div>
     </S.Form>
   );
 }

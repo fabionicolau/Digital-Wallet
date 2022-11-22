@@ -26,13 +26,14 @@ function FilterInputs() {
       setTransactionNotFound(true);
       return setErrorMessage(data.message);
     }
+    setErrorMessage('');
     setTransactionNotFound(false);
   };
 
   return (
     <div>
       <S.TitleP>
-        <h2>FilterInputs</h2>
+        <h2>Filtrar</h2>
       </S.TitleP>
       <S.TransferContainer>
         <label htmlFor="date">
@@ -50,7 +51,7 @@ function FilterInputs() {
             id="cashInOrOut"
             onChange={ (event) => setCashInOrOut(event.target.value) }
           >
-            <option value="" defaultValue="">-Escolha uma opção-</option>
+            <option value="" defaultValue="">Todas</option>
             <option value="cashin">Recebimento</option>
             <option value="cashout">Pagamento</option>
           </select>
@@ -64,7 +65,7 @@ function FilterInputs() {
       </S.TransferContainer>
       {errorMessage && (
         <div>
-          <p>{ errorMessage }</p>
+          <p align="center">{ errorMessage }</p>
         </div>
       )}
     </div>

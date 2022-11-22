@@ -4,8 +4,10 @@ export const TitleP = styled.div`
     width: 100%;
     margin-bottom: 0%;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 10px
 `;
 
 export const TransferContainer = styled.div`
@@ -31,7 +33,7 @@ export const TransferContainer = styled.div`
     height: 30px;
     margin-top: 20px;
     text-align: center;
-    background-color: #036B52;
+    background-color: #398368;
     font-weight: bold;
     color: white;
     border-radius: 5px;
