@@ -1,9 +1,9 @@
-# Boas-vindas ao repositório do projeto `Desafio NG.CASH`!
+# Boas-vindas ao repositório do projeto `Desafio Digital Wallet`!
 
 <details>
   <summary><strong>Proposta</strong></summary><br />
 
-  Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possibilitar que usuários da NG consigam realizar transferências internas entre si.
+  Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possibilitar que usuários da Digital Wallet consigam realizar transferências internas entre si.
 
   No backend, devem ser implementadas rotas para login, cadastro, conferência de saldo disponível, transfências entre contas e busca por data e/ou entrada e saída de valores.
 

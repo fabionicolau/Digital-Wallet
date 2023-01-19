@@ -1,7 +1,7 @@
 {
-  "name": "ngcash",
+  "name": "digital-wallet",
   "version": "1.0.0",
-  "description": "NGCASH pasta raiz",
+  "description": "digital-wallet pasta raiz",
   "main": "index.js",
   "scripts": {
     "install:apps": "(cd /backend && npm install) && (cd /frontend && npm install)",

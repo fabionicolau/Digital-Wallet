@@ -42,7 +42,7 @@ function Header() {
         type="button"
         className="content-div"
       >
-        NG.CASH
+        D-Wallet
       </button>
 
       <div className="right">

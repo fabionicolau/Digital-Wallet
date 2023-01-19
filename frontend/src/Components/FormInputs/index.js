@@ -4,7 +4,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import Proptypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import FormInputsContext from '../../Context/FormInputsContext/context';
-import logo from '../../images/logo.png';
 import * as S from './style';
 
 function FormInputs({ page }) {
@@ -58,7 +57,7 @@ function FormInputs({ page }) {
       <div>
         <S.Container>
 
-          <img src={ logo } alt="logo da empresa" />
+          <h1>DW</h1>
 
           <input
             id="username-input"

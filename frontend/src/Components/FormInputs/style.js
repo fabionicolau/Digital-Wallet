@@ -83,6 +83,12 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
 
+  h1 {
+    font-size: 100px;
+    color: white;
+    margin-bottom: 20px;
+  }
+
   div {
     margin-top: 10px;
     padding: 10px;

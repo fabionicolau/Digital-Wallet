@@ -1,7 +1,7 @@
 {
-  "name": "desafio-ngcash-frontend",
+  "name": "desafio-digital-wallet-frontend",
   "version": "0.1.0",
-  "description": "Frontend do desafio NG.CASH",
+  "description": "Frontend do desafio digital-wallet",
   "engines": {
     "node": ">=16.0.0"
   },

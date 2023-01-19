@@ -1,7 +1,7 @@
 {
-  "name": "desafio-ngcash-backend",
+  "name": "desafio-digital-wallet-backend",
   "version": "1.0.0",
-  "description": "Backend do desafio NG.CASH",
+  "description": "Backend do desafio digital-wallet",
   "main": "./build/server",
   "scripts": {
     "build": "npx -y tsc",
