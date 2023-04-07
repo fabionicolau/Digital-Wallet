@@ -34,8 +34,6 @@ export const HeaderContainer = styled.div`
   }
 
   .content-div:hover{
-    background-color: #008B8B;
-    color: black;
     cursor: pointer;
   }
 `;
