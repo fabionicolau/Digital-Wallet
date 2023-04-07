@@ -41,6 +41,8 @@ User.init({
   tableName: 'Users',
 });
 
-User.hasOne(Account, { foreignKey: 'id', as: 'account' });
+User.belongsTo(Account, { foreignKey: 'accountId', as: 'userAccount' })
+Account.hasMany(User, { foreignKey: 'accountId'})
+
 
 export default User;

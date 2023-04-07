@@ -6,6 +6,7 @@ import Transaction from '../database/models/Transaction';
 import Account from '../database/models/Account';
 import transactionValidate from '../validations/accountValidate';
 import userTransactionsReturn from '../helpers/userTransactionsReturn';
+import User from '../database/models/User';
 
 export default class TransactionService implements ITransactionService {
   createTransaction = async (transactionBody: ITransactionBody)
@@ -52,10 +53,33 @@ export default class TransactionService implements ITransactionService {
           },
         ],
       },
+      include: [
+        {
+          model: Account,
+          as: 'debitedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+        {
+          model: Account,
+          as: 'creditedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+      ],
     });
 
-    return await userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
-  }; 
+    return userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
+  };
+
 
   private getTransactionByDate = async (accountId: number, date: string)
   : Promise<ITransactionWithUsernames[]> => {
@@ -71,9 +95,31 @@ export default class TransactionService implements ITransactionService {
         ],
         createdAt: date,
       },  
+      include: [
+        {
+          model: Account,
+          as: 'debitedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+        {
+          model: Account,
+          as: 'creditedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+      ],
     });
 
-    return await userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
+    return userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
   };
 
   // eslint-disable-next-line max-len
@@ -88,18 +134,61 @@ export default class TransactionService implements ITransactionService {
         where: {
           [accountIdString]: accountId,
           createdAt: date,
-        },
-      }) as Transaction[]; 
+        }, include: [
+          {
+            model: Account,
+            as: 'debitedAccount',
+            include: [
+              {
+                model: User,
+                attributes: ['username'],
+              },
+            ],
+          },
+          {
+            model: Account,
+            as: 'creditedAccount',
+            include: [
+              {
+                model: User,
+                attributes: ['username'],
+              },
+            ],
+          },
+        ],
+      }) as Transaction[];
     }
     if (!date) {
       userTransactions = await Transaction.findAll({
         where: {
           [accountIdString]: accountId,
-        },  
-      }) as Transaction[];
+        }, 
+        include: [
+          {
+            model: Account,
+            as: 'debitedAccount',
+            include: [
+              {
+                model: User,
+                attributes: ['username'],
+              },
+            ],
+          },
+          {
+            model: Account,
+            as: 'creditedAccount',
+            include: [
+              {
+                model: User,
+                attributes: ['username'],
+              },
+            ],
+          },
+        ],
+      }); 
     }
 
-    return await userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
+    return userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
   };
  
   getFilteredTransactions = async (accountId: number, date: string, transaction: string)

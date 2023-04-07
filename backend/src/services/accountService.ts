@@ -9,17 +9,17 @@ export default class AccountService implements IAccountService {
       include: [
         {
           model: Account,
-          as: 'account',
+          as: 'userAccount',
           attributes: ['balance'],
         }],
     }) as IUserAccount | null;
-    
+
     if (!user) {
       const error = new Error('Conta não encontrada');
       error.name = 'notFound';
       throw error;
     }
 
-    return { username: user.username, balance: user.account.balance };
+    return { username: user.username, balance: user.userAccount.balance };
   };
 }

@@ -1,4 +1,3 @@
-import User from '../database/models/User';
 import Transaction from '../database/models/Transaction';
 
 const userTransactionsReturn = (userTransactions: Transaction[]) => {
@@ -8,20 +7,18 @@ const userTransactionsReturn = (userTransactions: Transaction[]) => {
     throw error; 
   }
   
-  const transactions = userTransactions.map(async (transaction) => {
-    const { id, debitedAccountId, creditedAccountId, value, createdAt } = transaction;
-    const debitedUser = await User.findOne({ where: { accountId: debitedAccountId } });
-    const crediterUser = await User.findOne({ where: { accountId: creditedAccountId } }); 
-
+  const transactions = userTransactions.map((transaction) => {
+    const { id, debitedAccount, creditedAccount, debitedAccountId, creditedAccountId, value, createdAt } = transaction as any;
     return { id,
-      debitedAccountId,
-      debitedUserName: debitedUser?.username,
-      creditedAccountId,
-      creditedUserName: crediterUser?.username,
-      value,
-      createdAt };
+    debitedAccountId,
+    debitedUserName: debitedAccount.Users[0].username,
+    creditedAccountId,
+    creditedUserName: creditedAccount.Users[0].username,
+    value,
+    createdAt };
   });
-  return Promise.all(transactions);
+
+  return transactions
 };
 
 export default userTransactionsReturn;
