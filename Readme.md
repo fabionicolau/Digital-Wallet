@@ -1,4 +1,4 @@
-# Boas-vindas ao repositório do projeto `Desafio Digital Wallet`!
+# Boas-vindas ao repositório do projeto `Digital Wallet`!
 
 <details>
   <summary><strong>Proposta</strong></summary><br />
