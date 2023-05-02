@@ -23,14 +23,13 @@
   <summary><strong>Configuração</strong></summary><br />
 
   * Para rodar o projeto, é necessário ter o `docker` e o `docker-compose` instalados;
-  * `npm install` para instalar as dependências;
-  * `npm run db:reset` para resetar o banco de dados;
   * `npm run compose:up` na raiz do projeto para rodar o container;
 
   <h4>Backend:</h4>
 
   * `npm install` na pasta 'backend' para instalar as dependências;
-  * `npm run dev` na pasta 'back end' se quiser rodar o servidor em modo de desenvolvimento;
+  * `npm run db:reset` na pasta 'backend' se quiser resetar o banco de dados;
+  * `npm run dev` na pasta 'backend' se quiser rodar o servidor em modo de desenvolvimento;
   * O projeto está configurado para rodar na porta `http://localhost:3001/`.  
   * Uma documentação do projeto em backend está disponível em <a href='https://documenter.getpostman.com/view/21539124/2s8YmSrL7v' target='_blank'>`https://documenter.getpostman.com/view/21539124/2s8YmSrL7v`</a>.
 
