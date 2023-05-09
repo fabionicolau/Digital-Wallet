@@ -23,6 +23,11 @@ export interface IUserReturn {
   token: string;
 }
 
+export interface IUserRepository {
+  userLogin(user: IUserLogin): Promise<IUser | null>;
+  userRegister({ username, password }: IUserLogin): Promise<IUser | undefined >;
+}
+
 export interface IUserService {
   userLogin(user: IUserLogin): Promise<IUserReturn | null>;
   userRegister(user: IUserLogin): Promise<IUserReturn | undefined>;

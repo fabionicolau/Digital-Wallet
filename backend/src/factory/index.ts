@@ -1,3 +1,4 @@
+import UserRepository from '../repository/userRepository';
 import UserService from '../services/userService';
 import UserController from '../controllers/userController';
 import AccountController from '../controllers/accountController';
@@ -6,7 +7,8 @@ import TransactionController from '../controllers/transactionsController';
 import TransactionService from '../services/transactionsService';
  
 // userInjection
-const newUserService = new UserService();
+const newUserRepository = new UserRepository();
+const newUserService = new UserService(newUserRepository);
 const newUserController = new UserController(newUserService);
 
 // accountInjection
