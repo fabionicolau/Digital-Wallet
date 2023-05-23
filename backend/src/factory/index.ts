@@ -4,8 +4,9 @@ import UserController from '../controllers/userController';
 import accountRepository from '../repository/accountRepository';
 import AccountService from '../services/accountService';
 import AccountController from '../controllers/accountController';
-import TransactionController from '../controllers/transactionsController';
+import TransactionRepository from '../repository/transactionsRepository';
 import TransactionService from '../services/transactionsService';
+import TransactionController from '../controllers/transactionsController';
  
 // userInjection
 const newUserRepository = new UserRepository();
@@ -18,7 +19,8 @@ const newAccountService = new AccountService(newAccountRepository);
 const newAccountController = new AccountController(newAccountService);
 
 // transactionInjection
-const newTransactionService = new TransactionService();
+const newTransactionRepository = new TransactionRepository();
+const newTransactionService = new TransactionService(newTransactionRepository);
 const newTransactionController = new TransactionController(newTransactionService);
 
 export { newUserController, newAccountController, newTransactionController };

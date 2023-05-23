@@ -1,0 +1,42 @@
+import * as Sequelize from 'sequelize';
+import sequelize from '../database/models';
+import { ITransaction, ITransacionRepository, ITransactionBodyWithCreditedAccountId,
+  ITransactionBody, ITransactionWithUsernames } from '../interfaces/transactionsInterfaces';
+import Transaction from '../database/models/Transaction';
+import Account from '../database/models/Account';
+import transactionValidate from '../validations/accountValidate';
+import userTransactionsReturn from '../helpers/userTransactionsReturn';
+import User from '../database/models/User';
+
+export default class TransactionRepository implements ITransacionRepository {
+  createTransaction = async (transactionBody: ITransactionBodyWithCreditedAccountId)
+  : Promise<ITransaction | undefined> => {
+    const { debitedAccountId, creditedAccountId, value } = transactionBody;
+     
+    
+    const t = await sequelize.transaction();
+    
+    try {
+      const transaction = await Transaction.create(
+        { debitedAccountId, creditedAccountId, value, createdAt: new Date() },
+        { transaction: t },
+      );
+
+      await Account.update( 
+        { balance: Sequelize.literal(`balance - ${value}`) },
+        { where: { id: debitedAccountId }, transaction: t },
+      );
+
+      await Account.update(
+        { balance: Sequelize.literal(`balance + ${value}`) },
+        { where: { id: creditedAccountId }, transaction: t },
+      );
+      
+      await t.commit();
+
+      return transaction;
+    } catch (error) {
+      await t.rollback();
+    }
+  };
+}

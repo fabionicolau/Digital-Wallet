@@ -17,6 +17,20 @@ export interface ITransactionBody {
   value: number; 
 }
 
+export interface ITransactionBodyWithCreditedAccountId extends ITransactionBody {
+  creditedAccountId: number;
+}
+
+export interface ITransacionRepository {
+  createTransaction(transactionBody: ITransactionBodyWithCreditedAccountId): Promise<ITransaction | undefined>;
+  // getAllTransactions(accountId: number): Promise<ITransaction[]>;
+  // getTransactionByDate(accountId: number, date: string): Promise<ITransaction[]>;
+  // getTransactionByCashoutOrCashinWithDate(accountId: number, date: string, transaction: string) 
+  // : Promise<ITransaction[]>
+  // getTransactionByCashoutOrCashin(accountId: number, date: string, transaction: string) 
+  // : Promise<ITransaction[]>
+}
+
 export interface ITransactionService {
   createTransaction(transaction: ITransactionBody): Promise<ITransaction | undefined>;
   getAllTransactions(accountId: number): Promise<ITransactionWithUsernames[]>;

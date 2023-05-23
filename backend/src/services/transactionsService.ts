@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 import sequelize from '../database/models';
-import { ITransaction, ITransactionService,
+import { ITransaction, ITransactionService, ITransacionRepository,
   ITransactionBody, ITransactionWithUsernames } from '../interfaces/transactionsInterfaces';
 import Transaction from '../database/models/Transaction';
 import Account from '../database/models/Account';
@@ -9,36 +9,22 @@ import userTransactionsReturn from '../helpers/userTransactionsReturn';
 import User from '../database/models/User';
 
 export default class TransactionService implements ITransactionService {
+  constructor(private transactionRepository: ITransacionRepository) {}
   createTransaction = async (transactionBody: ITransactionBody)
   : Promise<ITransaction | undefined> => {
     const { debitedAccountId, username, value } = transactionBody;
      
     const creditedAccountId = await transactionValidate(debitedAccountId, username, value);
     
-    const t = await sequelize.transaction();
-    
-    try {
-      const transaction = await Transaction.create(
-        { debitedAccountId, creditedAccountId, value, createdAt: new Date() },
-        { transaction: t },
-      );
+    const transaction = await this.transactionRepository.createTransaction({...transactionBody, creditedAccountId})
 
-      await Account.update( 
-        { balance: Sequelize.literal(`balance - ${value}`) },
-        { where: { id: debitedAccountId }, transaction: t },
-      );
-
-      await Account.update(
-        { balance: Sequelize.literal(`balance + ${value}`) },
-        { where: { id: creditedAccountId }, transaction: t },
-      );
-      
-      await t.commit();
-
-      return transaction;
-    } catch (error) {
-      await t.rollback();
+    if (!transaction) {
+      const error = new Error('Erro ao criar a transação');
+      error.name = 'validationError';
+      throw error;
     }
+    
+    return transaction;
   };
 
   getAllTransactions = async (accountId: number): Promise<ITransactionWithUsernames[]> => {
