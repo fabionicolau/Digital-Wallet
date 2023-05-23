@@ -12,14 +12,6 @@
 </details>
 
 <details>
-  <summary><strong>Realização</strong></summary><br />
-  
-  * Projeto `individual`;
-  * Foram utilizados `6` dias para realização do projeto;
-
-</details>
-
-<details>
   <summary><strong>Configuração</strong></summary><br />
 
   * Para rodar o projeto, é necessário ter o `docker` e o `docker-compose` instalados;
@@ -96,12 +88,5 @@
     <li>Sinon</li>
     <li>Mocha</li>
   </ul>
-
-</details>
-
-<details>
-  <summary><strong>Melhorias</strong></summary>
-
-  - Implementar testes unitários;
 
 </details>
