@@ -1,3 +1,5 @@
+import Transaction from '../database/models/Transaction';
+
 export interface ITransaction {
   id?: number;
   debitedAccountId: number;
@@ -15,6 +17,22 @@ export interface ITransactionBody {
   debitedAccountId: number;
   username: string;
   value: number; 
+}
+
+export interface ITransactionBodyWithCreditedAccountId extends ITransactionBody {
+  creditedAccountId: number;
+}
+
+export type TypeAccountIdString = "debitedAccountId" | "creditedAccountId"
+
+export interface ITransacionRepository {
+  createTransaction(transactionBody: ITransactionBodyWithCreditedAccountId): Promise<ITransaction | undefined>;
+  getAllTransactions(accountId: number): Promise<Transaction[]>;
+  getTransactionByDate(accountId: number, date: string): Promise<Transaction[]>;
+  getTransactionByCashoutOrCashin(accountIdString: TypeAccountIdString, accountId: number) 
+  : Promise<Transaction[]>
+  getTransactionByCashoutOrCashinWithDate(accountIdString: TypeAccountIdString, accountId: number, date: string) 
+  : Promise<Transaction[]>
 }
 
 export interface ITransactionService {

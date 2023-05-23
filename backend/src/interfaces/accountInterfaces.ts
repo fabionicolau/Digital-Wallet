@@ -16,6 +16,10 @@ export interface IUserBalance {
   balance: number;
 }
 
+export interface IAccountRepository {
+  getBalance(id: number): Promise<IUserAccount | null>;
+}
+
 export interface IAccountService {
   getBalance(id: number): Promise<IUserBalance>;
 }

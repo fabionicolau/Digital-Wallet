@@ -1,17 +1,15 @@
 import * as bcrypt from 'bcryptjs';
-import { IUserService, IUserLogin, IUserReturn } from '../interfaces/userInterfaces';
+import { IUserService, IUserLogin, IUserReturn, IUserRepository } from '../interfaces/userInterfaces';
 import createToken from '../helpers/jwtCreate';
-import User from '../database/models/User';
-import Account from '../database/models/Account';
 import userLoginValidate from '../validations/userLoginValidate';
-import sequelize from '../database/models';
 import isUsernameAlreadyExists from '../validations/isUsernameExists';
 
 export default class UserService implements IUserService {
+  constructor(private userRepository: IUserRepository) { }
   userLogin = async ({ username, password }: IUserLogin): Promise<IUserReturn | null> => {
     userLoginValidate({ username, password });
 
-    const user = await User.findOne({ where: { username } });
+    const user = await this.userRepository.userLogin({ username, password });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       const error = new Error('usuário ou senha inválidos');
@@ -34,26 +32,21 @@ export default class UserService implements IUserService {
     await isUsernameAlreadyExists(username);
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const t = await sequelize.transaction();
-    try {
-      const { id } = await Account.create({ balance: 100 }, { transaction: t });
-      const user = await User.create(
-        { username, password: hashedPassword, accountId: id },
-        { transaction: t },
-      );
-      
-      await t.commit();
-      
-      const token = createToken(user);
-
-      return { 
-        id: user.id,
-        username: user.username,
-        accountId: user.accountId,
-        token, 
-      } as IUserReturn;    
-    } catch (error) {
-      await t.rollback();
+   
+    const user = await this.userRepository.userRegister({ username, password: hashedPassword });
+    if (!user) {
+      const error = new Error('não foi possível criar o usuário');
+      error.name = 'validationError';
+      throw error;
     }
-  };
+
+    const token = createToken(user);
+  
+    return { 
+      id: user.id,
+      username: user.username,
+      accountId: user.accountId,
+      token, 
+    } as IUserReturn;    
+  }
 }

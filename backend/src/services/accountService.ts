@@ -1,19 +1,10 @@
-import { IAccountService, IUserAccount, IUserBalance } from '../interfaces/accountInterfaces';
-import Account from '../database/models/Account';
-import User from '../database/models/User';
+import { IAccountRepository, IAccountService, IUserBalance } from '../interfaces/accountInterfaces';
 
 export default class AccountService implements IAccountService {
+  constructor (private accountRepository: IAccountRepository) {}
   getBalance = async (id: number): Promise<IUserBalance> => {
-    const user = await User.findOne({
-      where: { id },
-      include: [
-        {
-          model: Account,
-          as: 'userAccount',
-          attributes: ['balance'],
-        }],
-    }) as IUserAccount | null;
-
+    const user = await this.accountRepository.getBalance(id);
+  
     if (!user) {
       const error = new Error('Conta não encontrada');
       error.name = 'notFound';
