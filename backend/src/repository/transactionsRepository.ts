@@ -1,11 +1,9 @@
 import * as Sequelize from 'sequelize';
 import sequelize from '../database/models';
-import { ITransaction, ITransacionRepository, ITransactionBodyWithCreditedAccountId,
-  ITransactionBody, ITransactionWithUsernames } from '../interfaces/transactionsInterfaces';
+import { ITransaction, ITransacionRepository,
+  ITransactionBodyWithCreditedAccountId,TypeAccountIdString } from '../interfaces/transactionsInterfaces';
 import Transaction from '../database/models/Transaction';
 import Account from '../database/models/Account';
-import transactionValidate from '../validations/accountValidate';
-import userTransactionsReturn from '../helpers/userTransactionsReturn';
 import User from '../database/models/User';
 
 export default class TransactionRepository implements ITransacionRepository {
@@ -119,4 +117,70 @@ export default class TransactionRepository implements ITransacionRepository {
 
     return userTransactions as Transaction[];
   };
+
+  getTransactionByCashoutOrCashin = async (accountIdString: TypeAccountIdString, accountId: number) 
+  : Promise<Transaction[]> => {
+    const userTransactions = await Transaction.findAll({
+      where: {
+        [accountIdString]: accountId,
+      }, 
+      include: [
+        {
+          model: Account,
+          as: 'debitedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+        {
+          model: Account,
+          as: 'creditedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+      ],
+    }); 
+
+    return userTransactions as Transaction[];
+  }
+
+  getTransactionByCashoutOrCashinWithDate = async (accountIdString: TypeAccountIdString, accountId: number, date: string)
+  : Promise<Transaction[]> => {
+    const userTransactions = await Transaction.findAll({
+      where: {
+        [accountIdString]: accountId,
+        createdAt: date,
+      }, include: [
+        {
+          model: Account,
+          as: 'debitedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+        {
+          model: Account,
+          as: 'creditedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return userTransactions as Transaction[];
+  }
 }

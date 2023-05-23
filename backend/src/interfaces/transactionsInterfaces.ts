@@ -23,14 +23,16 @@ export interface ITransactionBodyWithCreditedAccountId extends ITransactionBody 
   creditedAccountId: number;
 }
 
+export type TypeAccountIdString = "debitedAccountId" | "creditedAccountId"
+
 export interface ITransacionRepository {
   createTransaction(transactionBody: ITransactionBodyWithCreditedAccountId): Promise<ITransaction | undefined>;
   getAllTransactions(accountId: number): Promise<Transaction[]>;
   getTransactionByDate(accountId: number, date: string): Promise<Transaction[]>;
-  // getTransactionByCashoutOrCashinWithDate(accountId: number, date: string, transaction: string) 
-  // : Promise<ITransaction[]>
-  // getTransactionByCashoutOrCashin(accountId: number, date: string, transaction: string) 
-  // : Promise<ITransaction[]>
+  getTransactionByCashoutOrCashin(accountIdString: TypeAccountIdString, accountId: number) 
+  : Promise<Transaction[]>
+  getTransactionByCashoutOrCashinWithDate(accountIdString: TypeAccountIdString, accountId: number, date: string) 
+  : Promise<Transaction[]>
 }
 
 export interface ITransactionService {
