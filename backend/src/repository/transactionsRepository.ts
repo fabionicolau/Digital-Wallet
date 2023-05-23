@@ -21,12 +21,12 @@ export default class TransactionRepository implements ITransacionRepository {
       );
 
       await Account.update( 
-        { balance: Sequelize.literal(`balance - ${value}`) },
+        { balance: Sequelize.literal(`balance - ${String(value)}`) },
         { where: { id: debitedAccountId }, transaction: t },
       );
 
       await Account.update(
-        { balance: Sequelize.literal(`balance + ${value}`) },
+        { balance: Sequelize.literal(`balance + ${String(value)}`) },
         { where: { id: creditedAccountId }, transaction: t },
       );
       
