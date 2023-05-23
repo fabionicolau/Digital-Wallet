@@ -12,7 +12,7 @@ export default class TransactionRepository implements ITransacionRepository {
     const { debitedAccountId, creditedAccountId, value } = transactionBody;
      
     
-    const t = await sequelize.transaction();
+    const t = await sequelize.transaction({ autocommit: false });
     
     try {
       const transaction = await Transaction.create(
