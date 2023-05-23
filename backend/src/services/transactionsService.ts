@@ -28,40 +28,14 @@ export default class TransactionService implements ITransactionService {
   };
 
   getAllTransactions = async (accountId: number): Promise<ITransactionWithUsernames[]> => {
-    const userTransactions = await Transaction.findAll({
-      where: {
-        [Sequelize.Op.or]: [
-          {
-            debitedAccountId: accountId,
-          },
-          {
-            creditedAccountId: accountId,
-          },
-        ],
-      },
-      include: [
-        {
-          model: Account,
-          as: 'debitedAccount',
-          include: [
-            {
-              model: User,
-              attributes: ['username'],
-            },
-          ],
-        },
-        {
-          model: Account,
-          as: 'creditedAccount',
-          include: [
-            {
-              model: User,
-              attributes: ['username'],
-            },
-          ],
-        },
-      ],
-    });
+    const userTransactions = await this.transactionRepository.getAllTransactions(accountId);
+
+    if (!userTransactions) {
+      const error = new Error('Transação não encontrada');
+      error.name = 'notFound';
+      throw error;
+    }
+
 
     return userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
   };

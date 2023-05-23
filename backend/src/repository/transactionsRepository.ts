@@ -39,4 +39,43 @@ export default class TransactionRepository implements ITransacionRepository {
       await t.rollback();
     }
   };
+
+  getAllTransactions = async (accountId: number): Promise<Transaction[]> => {
+    const userTransactions = await Transaction.findAll({
+      where: {
+        [Sequelize.Op.or]: [
+          {
+            debitedAccountId: accountId,
+          },
+          {
+            creditedAccountId: accountId,
+          },
+        ],
+      },
+      include: [
+        {
+          model: Account,
+          as: 'debitedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+        {
+          model: Account,
+          as: 'creditedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return userTransactions as Transaction[];
+  };
 }

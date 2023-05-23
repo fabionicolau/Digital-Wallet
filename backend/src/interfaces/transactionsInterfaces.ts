@@ -1,3 +1,5 @@
+import Transaction from '../database/models/Transaction';
+
 export interface ITransaction {
   id?: number;
   debitedAccountId: number;
@@ -23,7 +25,7 @@ export interface ITransactionBodyWithCreditedAccountId extends ITransactionBody 
 
 export interface ITransacionRepository {
   createTransaction(transactionBody: ITransactionBodyWithCreditedAccountId): Promise<ITransaction | undefined>;
-  // getAllTransactions(accountId: number): Promise<ITransaction[]>;
+  getAllTransactions(accountId: number): Promise<Transaction[]>;
   // getTransactionByDate(accountId: number, date: string): Promise<ITransaction[]>;
   // getTransactionByCashoutOrCashinWithDate(accountId: number, date: string, transaction: string) 
   // : Promise<ITransaction[]>
