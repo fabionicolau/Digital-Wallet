@@ -11,7 +11,7 @@ export default class UserRepository implements IUserRepository {
   }
 
   userRegister = async ({ username, password }: IUserLogin): Promise<IUser | undefined> => {
-    const t = await sequelize.transaction();
+    const t = await sequelize.transaction({ autocommit: false });
     try {
       const { id } = await Account.create({ balance: 100 }, { transaction: t });
       const user: IUser = await User.create(
@@ -24,7 +24,6 @@ export default class UserRepository implements IUserRepository {
       return user as IUser;
     } catch (error) {
       await t.rollback();
-      return undefined;
     }
   }
 }

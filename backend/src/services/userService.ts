@@ -34,8 +34,9 @@ export default class UserService implements IUserService {
     const hashedPassword = await bcrypt.hash(password, 10);
    
     const user = await this.userRepository.userRegister({ username, password: hashedPassword });
+    console.log(user)
     if (!user) {
-      const error = new Error('não foi possível criar o usuário');
+      const error = new Error('Não foi possível criar o usuário');
       error.name = 'validationError';
       throw error;
     }
