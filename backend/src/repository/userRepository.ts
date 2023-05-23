@@ -1,8 +1,7 @@
 import User from '../database/models/User';
 import Account from '../database/models/Account';
 import sequelize from '../database/models';
-import { IUserRepository, IUserLogin, IUser, IUserReturn } from '../interfaces/userInterfaces';
-import createToken from '../helpers/jwtCreate';
+import { IUserRepository, IUserLogin, IUser } from '../interfaces/userInterfaces';
 
 export default class UserRepository implements IUserRepository {
   userLogin = async ({ username }: IUserLogin): Promise<IUser | null> => {
@@ -11,7 +10,7 @@ export default class UserRepository implements IUserRepository {
   }
 
   userRegister = async ({ username, password }: IUserLogin): Promise<IUser | undefined> => {
-    const t = await sequelize.transaction({ autocommit: false });
+    const t = await sequelize.transaction();
     try {
       const { id } = await Account.create({ balance: 100 }, { transaction: t });
       const user: IUser = await User.create(
