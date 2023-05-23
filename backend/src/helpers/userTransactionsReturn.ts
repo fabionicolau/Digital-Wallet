@@ -1,12 +1,6 @@
 import Transaction from '../database/models/Transaction';
 
 const userTransactionsReturn = (userTransactions: Transaction[]) => {
-  if (!userTransactions.length) {
-    const error = new Error('Transação não encontrada');
-    error.name = 'notFound';
-    throw error; 
-  }
-  
   const transactions = userTransactions.map((transaction) => {
     const { id, debitedAccount, creditedAccount, debitedAccountId, creditedAccountId, value, createdAt } = transaction as any;
     return { id,

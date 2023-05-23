@@ -30,10 +30,10 @@ export default class TransactionService implements ITransactionService {
   getAllTransactions = async (accountId: number): Promise<ITransactionWithUsernames[]> => {
     const userTransactions = await this.transactionRepository.getAllTransactions(accountId);
 
-    if (!userTransactions) {
+    if (!userTransactions.length) {
       const error = new Error('Transação não encontrada');
       error.name = 'notFound';
-      throw error;
+      throw error; 
     }
 
 
@@ -43,41 +43,13 @@ export default class TransactionService implements ITransactionService {
 
   private getTransactionByDate = async (accountId: number, date: string)
   : Promise<ITransactionWithUsernames[]> => {
-    const userTransactions = await Transaction.findAll({
-      where: {
-        [Sequelize.Op.or]: [
-          {
-            debitedAccountId: accountId,
-          },
-          {
-            creditedAccountId: accountId,
-          },
-        ],
-        createdAt: date,
-      },  
-      include: [
-        {
-          model: Account,
-          as: 'debitedAccount',
-          include: [
-            {
-              model: User,
-              attributes: ['username'],
-            },
-          ],
-        },
-        {
-          model: Account,
-          as: 'creditedAccount',
-          include: [
-            {
-              model: User,
-              attributes: ['username'],
-            },
-          ],
-        },
-      ],
-    });
+    const userTransactions = await this.transactionRepository.getTransactionByDate(accountId, date);
+    
+    if (!userTransactions.length) {
+      const error = new Error('Transação não encontrada');
+      error.name = 'notFound';
+      throw error; 
+    }
 
     return userTransactionsReturn(userTransactions) as ITransactionWithUsernames[];
   };

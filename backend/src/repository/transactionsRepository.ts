@@ -78,4 +78,45 @@ export default class TransactionRepository implements ITransacionRepository {
 
     return userTransactions as Transaction[];
   };
+
+  getTransactionByDate = async (accountId: number, date: string)
+  : Promise<Transaction[]> => {
+    const userTransactions = await Transaction.findAll({
+      where: {
+        [Sequelize.Op.or]: [
+          {
+            debitedAccountId: accountId,
+          },
+          {
+            creditedAccountId: accountId,
+          },
+        ],
+        createdAt: date,
+      },  
+      include: [
+        {
+          model: Account,
+          as: 'debitedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+        {
+          model: Account,
+          as: 'creditedAccount',
+          include: [
+            {
+              model: User,
+              attributes: ['username'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return userTransactions as Transaction[];
+  };
 }
