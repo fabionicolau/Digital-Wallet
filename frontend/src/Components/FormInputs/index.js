@@ -40,7 +40,7 @@ function FormInputs({ page }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password: userPassword }),
+      body: JSON.stringify({ username: username.toUpperCase(), password: userPassword }),
     });
     const response = await request.json();
 

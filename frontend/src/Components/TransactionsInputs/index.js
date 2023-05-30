@@ -19,7 +19,7 @@ function TransactionsInputs() {
         Authorization: user.token,
       },
       body: JSON.stringify({
-        username,
+        username: username.toUpperCase(),
         value,
       }),
     });
